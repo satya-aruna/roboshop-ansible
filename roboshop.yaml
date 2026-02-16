@@ -59,7 +59,7 @@
 
     - name: delete route53 records
       amazon.aws.route53:
-        state: present
+        state: absent
         zone: "{{ domain_name }}"
         record: "{{ item }}-{{ envmnt }}.{{ domain_name }}" # roboshop-dev.asadaws2026.online
         type: A 
