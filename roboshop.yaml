@@ -60,7 +60,7 @@
       amazon.aws.route53:
         state: present
         zone: "{{ domain_name }}"
-        record: "roboshop-{{ envmnt }}.{{ domain_name }}" # roboshop-dev.asadaws2026.online
+        record: "{{ item }}-{{ envmnt }}.{{ domain_name }}" # roboshop-dev.asadaws2026.online
         type: A 
         ttl: 1
       loop: "{{ instances }}"
