@@ -70,7 +70,7 @@
       record: "roboshop-{{ envmnt }}.{{ domain_name }}" 
       type: A
       ttl: 1
-      wait: false 
+      wait: true 
     loop: "{{ instances }}"
     when: 
       - item == "frontend"
@@ -83,7 +83,7 @@
       record: "{{ item }}-{{ envmnt }}.{{ domain_name }}"
       type: A 
       ttl: 1
-      wait: false
+      wait: true
     loop: "{{ instances }}"
     when: action == "destroy"
 
@@ -91,6 +91,6 @@
     amazon.aws.ec2_instance:
       state: absent
       name:  "{{ item }}-{{ envmnt }}"
-      wait: false
+      wait: true
     loop: "{{ instances }}"
     when: action == "destroy"
