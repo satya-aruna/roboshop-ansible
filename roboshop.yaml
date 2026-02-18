@@ -59,28 +59,28 @@
       wait: false
     loop: "{{ ec2_output.results }}"
     when: 
-    - item.item == "frontend"
-    - action == "create"
+      - item.item == "frontend"
+      - action == "create"
 
     ### DESTROY ###
   - name: delete r53 records for frontend
     amazon.aws.route53:
       state: absent
       zone: "{{ domain_name }}"
-      record: "roboshop-{{ envmnt }}.{{ domain_name }}" # roboshop-dev.daws88s.online
+      record: "roboshop-{{ env }}.{{ domain_name }}" 
       type: A
       ttl: 1
       wait: false 
     loop: "{{ instances }}"
-    when:  # and
-    - item == "frontend"
-    - action == "destroy"
+    when: 
+      - item == "frontend"
+      - action == "destroy"
 
   - name: delete route53 records
     amazon.aws.route53:
       state: absent
       zone: "{{ domain_name }}"
-      record: "{{ item }}-{{ envmnt }}.{{ domain_name }}" # roboshop-dev.asadaws2026.online
+      record: "{{ item }}-{{ envmnt }}.{{ domain_name }}"
       type: A 
       ttl: 1
       wait: false
