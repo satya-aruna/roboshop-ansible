@@ -67,7 +67,7 @@
     amazon.aws.route53:
       state: absent
       zone: "{{ domain_name }}"
-      record: "roboshop-{{ env }}.{{ domain_name }}" 
+      record: "roboshop-{{ envmnt }}.{{ domain_name }}" 
       type: A
       ttl: 1
       wait: false 
