@@ -2,6 +2,7 @@
 - name: create ec2  instances and route53 records
   hosts: all
   connection: local
+  become: yes
   vars:
     sg_id: sg-05b94ced162e1d820
     ami_id: ami-0220d79f3f480ecf5
