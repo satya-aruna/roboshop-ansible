@@ -47,7 +47,8 @@
     amazon.aws.route53:
       state: present
       zone: "{{ domain_name }}"
-      record: "{{ item.item }}-{{ envmnt }}.{{ domain_name }}" #mongodb-dev.asadaws2026.online, frontend-dev.asadaws2026.online
+      record: "{{ item.item }}-{{ envmnt }}.{{ domain_name }}" 
+      #mongodb-dev.asadaws2026.online, frontend-dev.asadaws2026.online
       type: A 
       ttl: 1
       value: "{{ item.instances[0].private_ip_address }}"
@@ -67,8 +68,8 @@
       wait: false
     loop: "{{ ec2_output.results }}"
     when: 
-      - item.item == "frontend"
-      - action == "create"
+    - item.item == "frontend"
+    - action == "create"
 
     ### DESTROY ###
   - name: delete r53 records for frontend
@@ -81,8 +82,8 @@
       wait: true 
     loop: "{{ instances }}"
     when: 
-      - item == "frontend"
-      - action == "destroy"
+    - item == "frontend"
+    - action == "destroy"
 
   - name: delete route53 records
     amazon.aws.route53:
